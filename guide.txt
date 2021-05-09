@@ -1,0 +1,2 @@
+
+load the city name as the index for the vertex| load # of edges | store the verticies that the edges are connected to
