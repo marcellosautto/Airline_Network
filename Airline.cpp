@@ -2,8 +2,9 @@
 
 Airline::Airline()
 {
-	
-
+	pathsTaken.clear();
+	pathsTaken.resize(1);
+	numPath = 0;
 }
 
 Airline::~Airline()
@@ -41,11 +42,6 @@ void Airline::createGraph()
 		row++;
 	}
 
-	/*for (int i = 0; i < row; i++)
-	{
-		cityGraph.at(i).resize(row);
-	}*/
-
 	cout << "ADJACENCY LIST: " << endl << endl;
 	for (size_t i = 0; i < cityGraph.size(); i++)
 	{
@@ -70,43 +66,48 @@ void Airline::depthFirstSearch(int vertex, int destination)
 	for (int i = 0; i < visited.size(); i++)
 		if (visited[i] == false)
 			depthFirstTraversal(vertex, visited, destination);
+
+	sort(pathDistances.begin(), pathDistances.end());
 			
 }
 
 void Airline::depthFirstTraversal(int vertex, vector<bool> &visited, int destination)
 {
-	visited[vertex] = true;
-
-	cout << cityNameVector[vertex] << " --------> ";
-
 	if (vertex == destination)
 	{
-		cout << "END" << endl;
-		exit(EXIT_SUCCESS);
+		//cout << "Destination Found" << endl;
+		pathsTaken.resize(pathsTaken.size() + 1); //create another row
+		//pathsTaken.at(numPath).emplace_back(cityNameVector[vertex]); //put destination in path vector
+		pathDistances.emplace_back(pathsTaken.at(numPath).size()); //store the distance of this path
+		numPath++;
+		return;
 	}
+
+	visited[vertex] = true;
 		
 	for (int i = 0; i < cityGraph.at(vertex).size(); i++)
 	{
 		if (visited[cityGraph[vertex][i]-1] == false) //if we found a vertex we havent visited, traverse to it
 		{
-			depthFirstTraversal(cityGraph[vertex][i] - 1,  visited, destination);
+			pathsTaken.at(numPath).emplace_back(cityNameVector[vertex]);
+			depthFirstTraversal(cityGraph[vertex][i] - 1, visited, destination);
 		}
 	}
 
-	
-	//start at vertex equal to parameter start
-	//traverse an edge
-	//when we traverse to a node, we must mark it as visited
-	//traverse to the first edge of the vertex we just traveled to
-	//continue this process until we reach a dead end
-	//once we reach a dead end, recursively visit all other nodes and traverse the vertecies we havent visited
-
 }
 
-void Airline::printGraph(int start, int end)
+void Airline::printShortestPath(int end)
 {
-	cout << "-------------------------------" << endl << endl;
-	//cout << "Shortest Path from " << cityNameVector[start] << " to " << cityNameVector[end] << " has been found " << endl;
+	for (int pathNum = 0; pathNum < pathDistances.size(); pathNum++)
+	{
+		if (pathDistances[0] == pathsTaken.at(pathNum).size())
+		{
+			for (int i = 0; i < pathsTaken.at(pathNum).size(); i++)
+				cout << pathsTaken[pathNum][i] << " ---> ";
+			cout << cityNameVector[end] << endl;
+			return;
+		}
+	}
 }
 
 void Airline::clearGraph()

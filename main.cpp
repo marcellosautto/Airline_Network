@@ -16,9 +16,10 @@ int main()
 	cin >> startPoint;
 	cout << "\nEnter Destination: ";
 	cin >> endPoint;
+	cout << endl;
 
 	al.depthFirstSearch(startPoint-1, endPoint-1);
-	al.printGraph(startPoint-1, endPoint-1);
+	al.printShortestPath(endPoint -1);
 
 	return 0;
 }

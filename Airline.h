@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 class Airline
@@ -15,7 +16,7 @@ public:
 
 
 	bool isEmpty() const;
-	void printGraph(int start, int end);
+	void printShortestPath(int end);
 
 	void createGraph(),
 		clearGraph(),
@@ -24,8 +25,12 @@ public:
 
 private:
 	int gSize; //current num of verticies
+	int numPath;
 	vector<string>cityNameVector;
 	vector<vector<int>>cityGraph;
+	vector<vector<string>>pathsTaken;
+	vector<int>pathDistances;
+	
 
 
 };
