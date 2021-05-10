@@ -1,5 +1,5 @@
 ﻿  Airline.cpp
-D:\VS_Projects\AirlineNetwork\Airline.cpp(67,2): warning C4834: discarding return value of function with 'nodiscard' attribute
+D:\VS_Projects\AirlineNetwork\Airline.cpp(66,2): warning C4834: discarding return value of function with 'nodiscard' attribute
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(700,1): warning C4267: 'initializing': conversion from 'size_t' to '_Objty', possible loss of data
           with
           [
@@ -24,5 +24,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
           [
               _Ty=unsigned __int64
           ]
-D:\VS_Projects\AirlineNetwork\Airline.cpp(71): message : see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::emplace_back<unsigned __int64>(unsigned __int64 &&)' being compiled
+D:\VS_Projects\AirlineNetwork\Airline.cpp(70): message : see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::emplace_back<unsigned __int64>(unsigned __int64 &&)' being compiled
+  main.cpp
+  Generating Code...
   AirlineNetwork.vcxproj -> D:\VS_Projects\AirlineNetwork\x64\Debug\AirlineNetwork.exe

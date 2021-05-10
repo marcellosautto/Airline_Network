@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <Windows.h>
 
 using namespace std;
 class Airline
@@ -19,14 +20,10 @@ public:
 	void printShortestPath(int start, int end);
 
 	void createGraph(),
-		clearGraph(),
-		depthFirstTraversal(int vertex, vector<bool>& visited, int destination),
-		depthFirstSearch(int vertex, int destination),
+		depthFirstSearch(int vertex, vector<bool>& visited, int destination),
 		saveSearchPath();
 
-private:
 	int gSize; //current num of verticies
-	int numPath;
 	vector<string>cityNameVector;
 	vector<vector<int>>cityGraph;
 	vector<string>pathTaken;

@@ -3,12 +3,13 @@
 Airline::Airline()
 {
 	pathTaken.clear();
-	//pathTaken.resize(1);
-	numPath = 0;
+	allPathsTaken.clear();
+	gSize = 0;
 }
 
 Airline::~Airline()
 {
+
 }
 
 bool Airline::isEmpty() const
@@ -59,38 +60,18 @@ void Airline::createGraph()
 void Airline::saveSearchPath()
 {
 	allPathsTaken.resize(allPathsTaken.size() + 1); //make a row for a new path to be saved
-	//allPathsTaken.at(allPathsTaken.size() - 1).emplace_back(pathTaken[i]);
-	//store path from start to end
+
 	for (int i = 0; i < pathTaken.size(); i++)
 		allPathsTaken.at(allPathsTaken.size() - 1).emplace_back(pathTaken[i]);
-
-	unique(allPathsTaken.at(allPathsTaken.size() - 1).begin(), allPathsTaken.at(allPathsTaken.size() - 1).end()); //remove any overflow
-	allPathsTaken.at(allPathsTaken.size() - 1).shrink_to_fit(); //shrink vector to fit
 
 	//store the distance of this path
 	pathDistances.emplace_back(allPathsTaken.at(allPathsTaken.size() - 1).size());
 }
 
-void Airline::depthFirstSearch(int vertex, int destination)
-{
-	//resize the visited bool vector according to the number of edges that vertex has
-	vector<bool> visited;
-	visited.resize(cityGraph.size());
-
-	//search through edges of given vertex
-	pathTaken.emplace_back(cityNameVector[vertex]);
-	depthFirstTraversal(vertex, visited, destination);
-
-	sort(pathDistances.begin(), pathDistances.end());
-
-}
-
-void Airline::depthFirstTraversal(int vertex, vector<bool>& visited, int destination)
+void Airline::depthFirstSearch(int vertex, vector<bool>& visited, int destination)
 {
 	if (vertex == destination)
 	{
-		//cout << "A path has been found" << endl << endl;
-		//pathTaken.emplace_back(cityNameVector[vertex]); //store end
 		saveSearchPath(); //save the path before looking for new paths
 		return;
 	}
@@ -99,10 +80,10 @@ void Airline::depthFirstTraversal(int vertex, vector<bool>& visited, int destina
 
 	for (int i = 0; i < cityGraph.at(vertex).size(); i++)
 	{
-		if (visited[cityGraph[vertex][i] - 1] == false) //if we found a vertex we havent visited, traverse to it
+		if (visited[cityGraph[vertex][i] - 1] == false && pathTaken.size() <= cityGraph.size()) //if we found a vertex we havent visited and we arent repeatedly going over vertecies, traverse to it
 		{
-			pathTaken.emplace_back(cityNameVector[cityGraph[vertex][i] - 1]);
-			depthFirstTraversal(cityGraph[vertex][i] - 1, visited, destination);
+			pathTaken.emplace_back(cityNameVector[cityGraph[vertex][i] - 1]); //store the next city in the path
+			depthFirstSearch(cityGraph[vertex][i] - 1, visited, destination); //recursively pass in the vertex that was just traversed to
 			pathTaken.pop_back();
 			visited[vertex] = false;
 		}
@@ -111,9 +92,8 @@ void Airline::depthFirstTraversal(int vertex, vector<bool>& visited, int destina
 
 }
 
-void Airline::printShortestPath(int start, int end)
+void Airline::printShortestPath(int start, int end) //prints the shortest path recorded
 {
-	//cout << cityNameVector[start] << " ---> ";
 	for (int pathNum = 0; pathNum < pathDistances.size(); pathNum++)
 	{
 		if (pathDistances[0] == allPathsTaken.at(pathNum).size())
@@ -132,6 +112,3 @@ void Airline::printShortestPath(int start, int end)
 	}
 }
 
-void Airline::clearGraph()
-{
-}
