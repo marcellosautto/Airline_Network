@@ -3,9 +3,6 @@
 int main()
 {
 	//create graph and store in vector
-	//
-
-
 
 	Airline al;
 
@@ -19,7 +16,7 @@ int main()
 	cout << endl;
 
 	al.depthFirstSearch(startPoint-1, endPoint-1);
-	al.printShortestPath(endPoint -1);
+	al.printShortestPath(startPoint - 1, endPoint -1);
 
 	return 0;
 }

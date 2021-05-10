@@ -16,19 +16,21 @@ public:
 
 
 	bool isEmpty() const;
-	void printShortestPath(int end);
+	void printShortestPath(int start, int end);
 
 	void createGraph(),
 		clearGraph(),
 		depthFirstTraversal(int vertex, vector<bool>& visited, int destination),
-		depthFirstSearch(int vertex, int destination);
+		depthFirstSearch(int vertex, int destination),
+		saveSearchPath();
 
 private:
 	int gSize; //current num of verticies
 	int numPath;
 	vector<string>cityNameVector;
 	vector<vector<int>>cityGraph;
-	vector<vector<string>>pathsTaken;
+	vector<string>pathTaken;
+	vector<vector<string>> allPathsTaken;
 	vector<int>pathDistances;
 	
 

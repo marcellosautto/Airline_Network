@@ -1,2 +1,7 @@
-﻿  main.cpp
+﻿  Airline.cpp
+D:\VS_Projects\AirlineNetwork\Airline.cpp(36,24): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\AirlineNetwork\Airline.cpp(68,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\AirlineNetwork\Airline.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\AirlineNetwork\Airline.cpp(111,32): warning C4018: '<': signed/unsigned mismatch
+D:\VS_Projects\AirlineNetwork\Airline.cpp(115,22): warning C4018: '<': signed/unsigned mismatch
   AirlineNetwork.vcxproj -> D:\VS_Projects\AirlineNetwork\Debug\AirlineNetwork.exe

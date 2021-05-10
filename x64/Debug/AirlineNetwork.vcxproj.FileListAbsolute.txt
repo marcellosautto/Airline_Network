@@ -1,0 +1,2 @@
+D:\VS_Projects\AirlineNetwork\x64\Debug\AirlineNetwork.exe
+D:\VS_Projects\AirlineNetwork\x64\Debug\AirlineNetwork.pdb
