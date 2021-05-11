@@ -16,14 +16,16 @@ public:
 	~Airline();
 
 
-	bool isEmpty() const;
+	bool run(string source);
 	void printShortestPath(int start, int end);
 
 	void createGraph(),
+		printAdjList(),
 		depthFirstSearch(int vertex, vector<bool>& visited, int destination),
 		saveSearchPath();
 
 	int gSize; //current num of verticies
+	ifstream inFile;
 	vector<string>cityNameVector;
 	vector<vector<int>>cityGraph;
 	vector<string>pathTaken;

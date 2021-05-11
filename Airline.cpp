@@ -12,21 +12,52 @@ Airline::~Airline()
 
 }
 
-bool Airline::isEmpty() const
-{
+bool Airline::run(string source) {
+
+	char c;
+
+	inFile.open(source);
+	createGraph();
+
+	system("cls");
+
+	printAdjList();
+
+	int startPoint, endPoint;
+	cout << "Enter Start: ";
+	cin >> startPoint;
+	cout << "\nEnter Destination: ";
+	cin >> endPoint;
+	cout << endl;
+
+	//resize the visited bool vector according to the number of edges that vertex has
+	vector<bool> visited;
+	visited.resize(cityGraph.size());
+
+	//search through edges of given vertex
+	pathTaken.emplace_back(cityNameVector[startPoint - 1]);
+	depthFirstSearch(startPoint - 1, visited, endPoint - 1);
+
+	sort(pathDistances.begin(), pathDistances.end());
+
+	cout << "The shortest path from " << cityNameVector[startPoint - 1] << " and " << cityNameVector[endPoint - 1] << " is: " << endl << endl;
+	printShortestPath(startPoint - 1, endPoint - 1);
+
+
+	cout << "\nWould you like to find another path? (Y/N)" << endl;
+	cin >> c;
+
+	if (toupper(c) == 'Y')
+		return true;
+
 	return false;
 }
 
-void Airline::createGraph()
+void Airline::createGraph() //store graph in 2D vector
 {
-	int numVerticies = 0, row = 0, currentVertex;
+	int numVerticies = 0, row = 0, currentVertex = 0;
 
-	//string source = "";
 	string currCity = "";
-
-	//cout << "Enter name for network file: ";
-	//cin >> source;
-	ifstream inFile("NetworkFile.txt");
 
 	while (!inFile.eof() && inFile >> currCity)
 	{
@@ -43,6 +74,11 @@ void Airline::createGraph()
 		row++;
 	}
 	cityGraph.resize(row);
+
+}
+
+void Airline::printAdjList()
+{
 	cout << "ADJACENCY LIST: " << endl << endl;
 	for (size_t i = 0; i < cityGraph.size(); i++)
 	{
@@ -54,14 +90,13 @@ void Airline::createGraph()
 		cout << endl;
 	}
 	cout << endl << "-----------------------" << endl << endl;
-
 }
 
 void Airline::saveSearchPath()
 {
 	allPathsTaken.resize(allPathsTaken.size() + 1); //make a row for a new path to be saved
 
-	for (int i = 0; i < pathTaken.size(); i++)
+	for (size_t i = 0; i < pathTaken.size(); i++) //save found path
 		allPathsTaken.at(allPathsTaken.size() - 1).emplace_back(pathTaken[i]);
 
 	//store the distance of this path
@@ -85,11 +120,10 @@ void Airline::depthFirstSearch(int vertex, vector<bool>& visited, int destinatio
 			pathTaken.emplace_back(cityNameVector[cityGraph[vertex][i] - 1]); //store the next city in the path
 			depthFirstSearch(cityGraph[vertex][i] - 1, visited, destination); //recursively pass in the vertex that was just traversed to
 			pathTaken.pop_back();
-			visited[vertex] = false;
+			
 		}
+		visited[vertex] = false;
 	}
-
-
 }
 
 void Airline::printShortestPath(int start, int end) //prints the shortest path recorded
@@ -105,10 +139,7 @@ void Airline::printShortestPath(int start, int end) //prints the shortest path r
 				cout << allPathsTaken[pathNum][i];
 			}
 			cout << endl;
-			
 			break;
 		}
-
 	}
 }
-

@@ -23,11 +23,10 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
           [
               _Ty=unsigned __int64
           ]
-D:\VS_Projects\AirlineNetwork\Airline.cpp(68): message : see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::emplace_back<unsigned __int64>(unsigned __int64 &&)' being compiled
-  main.cpp
+D:\VS_Projects\AirlineNetwork\Airline.cpp(103): message : see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::emplace_back<unsigned __int64>(unsigned __int64 &&)' being compiled
   Generating code
-  6 of 522 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    17 functions had inline decision re-evaluated but remain unchanged
+  0 of 525 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AirlineNetwork.vcxproj -> D:\VS_Projects\AirlineNetwork\x64\Release\AirlineNetwork.exe
